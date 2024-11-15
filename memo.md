@@ -32,8 +32,12 @@ public:
 };
 
 int main() {
-    // Map to associate user choices with function objects
-    std::map<std::string, std::unique_ptr<Function>> functions;
+    // Map to associate user choices with function pointers
+    std::map<std::string, Function*> functions;
+    FuncA funcA;
+    FuncB funcB;
+    FuncC funcC;
+
     functions["funcA"] = &funcA;
     functions["funcB"] = &funcB;
     functions["funcC"] = &funcC;
