@@ -13,7 +13,7 @@ public:
     std::vector<std::string> correctAnswers;
     int score;
     std::vector<bool> usedQuestions;
-    std::vector<std::pair<std::string, std::string>>& correctQuestions;
+    std::vector<std::pair<std::string, std::string>> correctQuestions;
     int random = 0;
 
     void play(){
@@ -61,7 +61,7 @@ public:
             std::cout << correctQuestions[i].first << " Answer: " << correctQuestions[i].second << std::endl;
         }
     }
-    Quiz(std::string quizName);
+    Quiz(std::string name) : quizName(name){};
 };
 
 int main()
