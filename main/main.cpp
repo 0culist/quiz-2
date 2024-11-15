@@ -3,7 +3,8 @@
 #include <vector>
 #include <time.h>
 #include <cctype>
-
+#include <algorithm>
+#include <random>
 
 class Quiz {
 public:
@@ -17,8 +18,9 @@ public:
     int random = 0;
 
     void play(){
-        std::srand(time(NULL)); // seed rand() with current timestamp
-
+        std::srand(time(NULL)); // seed 'rand()' with current timestamp
+        std::default_random_engine rng; // create random engine object for shuffling 'answers' array
+        rng.seed(time(NULL)); // seed 'rng' with current timestamp
         int score = 0;
         std::vector<std::pair<std::string, std::string>> correctQuestions;
         std::vector<bool> usedQuestions;
@@ -34,6 +36,9 @@ public:
                 if (!usedQuestions[random]) { break; }
             }
 
+            // shuffle 'answers' array so that the answers will be output in a random order
+            shuffle(answers[random].begin(), answers[random].end(), rng); // shuffle
+            
             // output question and list of answers
             std::cout << questions[random] << std::endl;
             std::cout << "[1] " << answers[random][0] << "    [2] " << answers[random][1] << "    [3] " << answers[random][2] << "    [4] " << answers[random][3] << "\nAnswer: ";
