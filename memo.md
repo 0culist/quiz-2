@@ -3,7 +3,6 @@ Unfortunately, C++ doesn't directly support the `choice.play()` syntax for execu
 ```cpp
 #include <iostream>
 #include <string>
-#include <memory>
 #include <map>
 
 // Base class
@@ -37,9 +36,9 @@ public:
 int main() {
     // Map to associate user choices with function objects
     std::map<std::string, std::unique_ptr<Function>> functions;
-    functions["funcA"] = std::make_unique<FuncA>();
-    functions["funcB"] = std::make_unique<FuncB>();
-    functions["funcC"] = std::make_unique<FuncC>();
+    functions["funcA"] = &funcA;
+    functions["funcB"] = &funcB;
+    functions["funcC"] = &funcC;
 
     std::string choice;
     std::cout << "Choose a function: funcA, funcB, funcC" << std::endl;
