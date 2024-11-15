@@ -1,5 +1,3 @@
-Unfortunately, C++ doesn't directly support the `choice.play()` syntax for executing functions based on user input like some other languages do. However, we can get very close by using objects and polymorphism. Here's an example that leverages polymorphism to achieve this:
-
 ```cpp
 #include <iostream>
 #include <string>
@@ -61,5 +59,3 @@ In this example:
 - For each function (`funcA`, `funcB`, `funcC`), I've created a derived class that overrides the `play()` method.
 - A `std::map` is used to associate the user's choice with a unique pointer to a `Function` object.
 - Based on the user's input, the corresponding function's `play()` method is called.
-
-This approach keeps your code flexible and allows you to extend it easily with additional functions in the future. Give it a try and let me know if you need further assistance!
