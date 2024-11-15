@@ -1,9 +1,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <time.h>
-#include <cctype>
-#include <algorithm>
+#include <cctype> // provides .toupper()
+#include <algorithm> // provides shuffle()
 #include <random>
 
 class Quiz {
@@ -18,9 +17,10 @@ public:
     int random = 0;
 
     void play(){
-        std::srand(time(NULL)); // seed 'rand()' with current timestamp
-        std::default_random_engine rng; // create random engine object for shuffling 'answers' array
-        rng.seed(time(NULL)); // seed 'rng' with current timestamp
+        std::random_device rdSeed; // create a random device object to generate a random seed
+        std::default_random_engine rng(rdSeed()); // create random engine object for shuffling 'answers' array
+        std::uniform_int_distribution<int> dist(0, questions.size() - 1);
+
         int score = 0;
         std::vector<std::pair<std::string, std::string>> correctQuestions;
         std::vector<bool> usedQuestions;
@@ -32,12 +32,12 @@ public:
         for (auto i : questions) {
             while (true) {
                 // generate random int within range of 'questions' array
-                random = std::rand() % questions.size();
+                random = dist(rng);
                 if (!usedQuestions[random]) { break; }
             }
 
             // shuffle 'answers' array so that the answers will be output in a random order
-            shuffle(answers[random].begin(), answers[random].end(), rng); // shuffle
+            shuffle(answers[random].begin(), answers[random].end(), rng);
             
             // output question and list of answers
             std::cout << questions[random] << std::endl;
